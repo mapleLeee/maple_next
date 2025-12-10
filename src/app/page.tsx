@@ -205,7 +205,7 @@ export default function Home() {
                 {/* 巨型视差标题 */}
                 <div className="relative h-screen flex items-center justify-center overflow-hidden">
                     <motion.div
-                        className="text-9xl md:text-[14rem] font-black tracking-tighter bg-clip-text text-transparent pointer-events-none select-none"
+                        className="text-6xl sm:text-9xl md:text-[14rem] font-black tracking-tighter bg-clip-text text-transparent pointer-events-none select-none"
                         style={{
                             backgroundImage: "linear-gradient(90deg, #a855f7, #ec4899, #06b6d4, #a855f7)",
                             WebkitBackgroundClip: "text",
