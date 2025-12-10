@@ -1,0 +1,23 @@
+.lizibeijing {
+    @apply fixed inset-0 -z-10
+    bg-gradient-to-br
+}
+
+
+/* Button */
+.btn {
+    @apply px-4 py-2 rounded-md font-medium transition;
+}
+
+.btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+/* Card */
+.card {
+    @apply rounded-xl border bg-white shadow p-4;
+}
+
+.card-header {
+    @apply font-semibold text-lg mb-2;
+}

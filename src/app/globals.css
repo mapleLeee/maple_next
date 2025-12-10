@@ -1,26 +1,153 @@
 @import "tailwindcss";
+@import "../styles/ui.css";
+
+html.dark {
+    --spotlight-color: rgba(209, 165, 252, 0.4);
+}
+
+html:not(.dark) {
+    --spotlight-color: rgb(255, 0, 0);
+}
+/* 只改 app/globals.css：添加这些，确保在浅色浏览器下强制暗黑生效（如果有系统级冲突） */
+/* 同时优化渐变/背景，确保兼容 */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #000000;
+    --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --background: #000000; /* 强制黑底 */
+        --foreground: #ffffff;
+    }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* 粒子背景：加深对比 */
+#particles {
+    background: linear-gradient(to bottom right, rgba(59, 0, 107, 0.1), rgba(0, 0, 0, 1), rgba(0, 0, 59, 0.1));
+}
+
+/* 光斑：降低透明，避免浅色下过亮 */
+.spotlight {
+    background: radial-gradient(circle, rgba(120, 119, 198, 0.2) 0%, transparent 70%);
+    filter: blur(100px);
+}
+
+/* 卡片：加深背景，增强玻璃拟态 */
+.group {
+    background: linear-gradient(to bottom right, rgba(17, 17, 17, 0.8), rgba(31, 31, 31, 0.8)) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 鼠标跟随光斑 */
+.spotlight {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(120, 119, 198, 0.3) 0%, transparent 70%);
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+/* 主题切换按钮光晕（浅色模式下也好看） */
+html:not(.dark) .bg-black {
+    background: #f8f9ff !important;
+}
+
+html:not(.dark) .text-white {
+    color: #0f172a !important;
+}
+
+html:not(.dark) #particles {
+    background: linear-gradient(to bottom right, rgba(147, 51, 234, 0.08), #06cda7, rgba(6, 182, 212, 0.08));
+}
+
+/* —— 白天模式高级调色 —— */
+html:not(.dark) {
+    background: rgb(252, 252, 255);
+    color: #0f172a;
+}
+
+/* 卡片白天模式：毛玻璃 + 极淡紫影 + 柔光边框 */
+html:not(.dark) .group {
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(147, 119, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(147, 119, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* 文字渐变白天也漂亮 */
+html:not(.dark) .bg-clip-text {
+    background-image: linear-gradient(to right, #8b5cf6, #ec4899, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* 鼠标光斑白天模式变成柔和白光 */
+html:not(.dark) .spotlight {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 65%);
+    filter: blur(100px);
+}
+
+/* —— 白天模式文字颜色强化 —— */
+html:not(.dark) {
+    color: #0f172a; /* 主文字：超深灰蓝，几乎黑但更高级 */
+}
+
+
+html:not(.dark) p,
+html:not(.dark) span,
+html:not(.dark) div {
+    color: #1e293b; /* 副文字：深石板灰 */
+}
+
+html:not(.dark) .text-gray-300,
+html:not(.dark) .text-gray-400,
+html:not(.dark) .text-gray-500,
+html:not(.dark) .text-gray-600{
+    color: #475569 !important; /* 统一把浅灰替换成可读性极高的中深灰 */
+}
+
+html:not(.dark) .text-gray-900{
+    color: #783030 !important; /* 统一把浅灰替换成可读性极高的中深灰 */
+}
+
+
+/* 副标题那句 “Senior Frontend Engineer · 像素架构师” 也加粗一点 */
+/* 副标题加粗可读 */
+html:not(.dark) .font-light {
+    font-weight: 500 !important;
+    color: #334155;
+}
+
+/* “查看项目”文字更明显 */
+html:not(.dark) .text-purple-600 {
+    color: #7c3aed !important;
+}
+
