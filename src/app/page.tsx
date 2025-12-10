@@ -282,7 +282,7 @@ export default function Home() {
                                     </p>
                                     <div
                                         className="flex items-center gap-2 mt-6 dark:text-cyan-400 text-purple-600 font-medium">
-                                        <span className="text-xl">查看项目</span>
+                                        <span className="text-xl">查看項目</span>
                                         <ExternalLink className="w-5 h-5 group-hover:translate-x-2 transition"/>
                                     </div>
                                 </div>
